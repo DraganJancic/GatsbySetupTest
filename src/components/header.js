@@ -1,24 +1,22 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import NavMenu from './NavMenu'
 
-const Header = ({ siteTitle }) => (
+import './Header.scss'
+
+
+const Header = ({ siteTitle, language, translations }) => (
   <header
     style={{
       background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
     }}
+    className="header"
   >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
+    <div className="header__logo">
       <h1 style={{ margin: 0 }}>
         <Link
-          to="/"
+          to={language === 'is_IS' ? '/' : '/en'}
           style={{
             color: `white`,
             textDecoration: `none`,
@@ -27,6 +25,15 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
+    </div>
+    <div className="header__nav-wrapper">
+      <NavMenu language={language}/>
+      <Link 
+        to={translations ? translations.uri : (language === 'is_IS' ? '/en' : '/') } 
+        style={{color: "#fff"}}
+      >
+        {language === 'is_IS' ? 'en' : 'is'}
+      </Link>
     </div>
   </header>
 )
